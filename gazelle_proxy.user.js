@@ -3,7 +3,7 @@
 // @namespace   ahdis
 // @match       https://gazelle.ihe.net/proxy/messages/http.seam*
 // @grant       none
-// @version     20240604T121900
+// @version     20240604T155900
 // @author      Quentin Ligier
 // @description This script allows to automatically decompress GZIP-encoded messages.
 // @updateURL   https://github.com/ahdis/userscripts/raw/master/gazelle_proxy.user.js
