@@ -30,7 +30,7 @@ if (headers.includes('Content-Encoding: gzip')) {
     const blob = await res.blob();
     const decompressedStream = blob.stream().pipeThrough(ds);
     const decoded = await new Response(decompressedStream).text();
-    const messageDiv = document.querySelector('h3 + div');
+    const messageDiv = document.querySelector(`form[id="${parts[0]}:insertForm"] div.well`);
     messageDiv.innerText = `ahdis userscript: the message has been GZIP-decompressed:\n\n${decoded}`;
   });
 }
