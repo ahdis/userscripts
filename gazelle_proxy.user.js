@@ -29,8 +29,41 @@ if (headers.includes('Content-Encoding: gzip')) {
     const ds = new DecompressionStream("gzip");
     const blob = await res.blob();
     const decompressedStream = blob.stream().pipeThrough(ds);
-    const decoded = await new Response(decompressedStream).text();
+    let decoded = await new Response(decompressedStream).text();
+
+    if (decoded[0] === '[' || decoded[0] === '{') {
+      decoded = indentJson(decoded);
+    } else if (decoded[0] === '<') {
+      decoded = indentXml(decoded);
+    }
+
     const messageDiv = document.querySelector(`form[id="${parts[0]}:insertForm"] div.well`);
-    messageDiv.innerText = `ahdis userscript: the message has been GZIP-decompressed:\n\n${decoded}`;
+    messageDiv.innerHTML = `ahdis userscript: the message has been GZIP-decompressed:\n\n<pre>${escapeHtml(decoded)}</pre>`;
   });
+}
+
+
+function indentXml(xml) {
+  let formatted = "",
+    indent = "";
+  const tab = "  ";
+  xml.split(/>\s*</).forEach(function (node) {
+    if (node.match(/^\/\w/)) indent = indent.substring(tab.length); // decrease indent by one 'tab'
+    formatted += indent + "<" + node + ">\r\n";
+    if (node.match(/^<?\w[^>]*[^\/]$/)) indent += tab; // increase indent
+  });
+  return formatted.substring(1, formatted.length - 3);
+}
+
+function indentJson(json) {
+  return JSON.stringify(JSON.parse(json), null, 2);
+}
+
+function escapeHtml(unsafe) {
+  return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
 }
