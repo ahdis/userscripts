@@ -11,7 +11,10 @@ You need to install a userscript extension in your browser. Common choices are:
 
 See also https://github.com/awesome-scripts/awesome-userscripts?tab=readme-ov-file#how-to-use.
 
-Then, open the userscript file in GitHub and click on the "Raw" button. Your userscript extension should allow you to install the userscript. Alternatively, you can install the userscript from the raw file URL (e.g. https://github.com/ahdis/userscripts/raw/master/gazelle_proxy.user.js).
+Then, open the userscript by clicking on one of the following links and click "Install" on the screen that will be presented by the userscript extension:
+
+- [New features for the Gazelle proxy (legacy)](https://github.com/ahdis/userscripts/raw/master/gazelle_proxy.user.js).
+- [New features for the Gazelle datahouse (proxy beta)](https://github.com/ahdis/userscripts/raw/master/gazelle_datahouse.user.js)
 
 ## How to modify
 
